@@ -1,0 +1,48 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@model Gallery.Pages.ShowAlbumModel
+@{
+}
+
+
+@if (Model.Album == null)
+{
+    ViewData["Title"] = "Album not found";
+    <p>
+        Could not find the album.
+    </p>
+}
+else
+{
+    ViewData["Title"] = Model.Album;
+    if (Model.Photos.Count == 0)
+    {
+    <p>
+        <span class="text-secondary">@Model.Album</span> is empty.
+    </p>
+    }
+    else
+    {
+        foreach (var photo in Model.Photos)
+        {
+            
+                <form class="d-inline" asp-page="ShowImage" method="post">
+                    <input type="hidden" name="PhotoId" value="@photo.Id" />
+                    <input type="image" name="submit" class="img-thumbnail" src='data:image/png;base64,@System.Convert.ToBase64String(photo.Thumbnails.FirstOrDefault().Blob)' />
+                </form>
+         
+        
+        @*
+        <input type="image" src="/Button1.jpg" border="0"/>
+        <img class="img-thumbnail" src='data:image/png;base64,@System.Convert.ToBase64String(photo.Thumbnails.FirstOrDefault().Blob)' />
+        *@
+        }
+    }
+
+<form action="/Upload" method="get">
+    <div class="form-group">
+        <input type="hidden" name="aId" value="@Model.Album.Name" />
+        <input type="submit" value="Add Photos" class="btn btn-primary" />
+    </div>
+</form>
+}

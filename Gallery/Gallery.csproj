@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-Gallery-43FF061B-4B60-4786-838E-5CAE991FCD35</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210323165157_idk.cs" />
+    <Compile Remove="Migrations\20210323165157_idk.Designer.cs" />
+    <Compile Remove="Migrations\20210417103758_filehazalbum.cs" />
+    <Compile Remove="Migrations\20210417103758_filehazalbum.Designer.cs" />
+    <Compile Remove="Migrations\20210417104707_filehazalbum.cs" />
+    <Compile Remove="Migrations\20210417104707_filehazalbum.Designer.cs" />
+    <Compile Remove="Migrations\20210417105043_filehazalbum.cs" />
+    <Compile Remove="Migrations\20210417105043_filehazalbum.Designer.cs" />
+    <Compile Remove="Migrations\20210420204229_comments1.cs" />
+    <Compile Remove="Migrations\20210420204229_comments1.Designer.cs" />
+    <Compile Remove="Migrations\20210426175322_comments3.cs" />
+    <Compile Remove="Migrations\20210426175322_comments3.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.11" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
+  </ItemGroup>
+
+</Project>

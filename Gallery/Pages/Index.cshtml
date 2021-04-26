@@ -1,0 +1,19 @@
+﻿@page
+@model Gallery.Pages.IndexModel
+@{
+}
+
+@if (Model.files.Count > 0)
+{
+    foreach (var photo in Model.files)
+    {
+        <form class="d-inline" asp-page="ShowImage" method="post">
+            <input type="hidden" name="PhotoId" value="@photo.Id" />
+            <input type="image" name="submit" class="img-thumbnail" src='data:image/png;base64,@System.Convert.ToBase64String(photo.Thumbnails.FirstOrDefault().Blob)' />
+        </form>
+    }
+}
+else
+{
+    <p>There is no public image in the whole gallery.</p>
+}
