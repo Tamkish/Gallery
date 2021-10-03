@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Gallery.Data;
 using Gallery.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -12,27 +10,23 @@ namespace Gallery.Pages
 {
     public class IndexModel : PageModel
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public IndexModel( ApplicationDbContext context)
+
+        public List<StoredFile> files;
+
+        public IndexModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-
-
-        public List<StoredFile> files;
         public IActionResult OnGet()
         {
-            string userId = "";
+            var userId = "";
             if (!User.Identity.IsAuthenticated)
-            {
                 return Redirect("Identity/Account/Login");
-            }
-            else
-            {
-                userId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value; // získáme id přihlášeného uživatele
-            }
+            userId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).FirstOrDefault()
+                .Value; // získáme id přihlášeného uživatele
             //                                                                                                  
             /*files =_context.Files
                 .OrderByDescending(f => f.UploadedAt)
@@ -47,18 +41,15 @@ namespace Gallery.Pages
             var filez = _context.Files.OrderByDescending(f => f.UploadedAt);
 
             foreach (var file in filez)
-			{
-				if (albums.Any(a => a.Files.Any(f => f.Id == file.Id)))
-				{
+            {
+                if (albums.Any(a => a.Files.Any(f => f.Id == file.Id)))
+                {
                     _context.Entry(file).Collection(f => f.Thumbnails).Load();
                     files.Add(file);
-				}
-				if (files.Count >= 12)
-				{
-                    break;
-				}
-			}
+                }
 
+                if (files.Count >= 12) break;
+            }
 
 
             return Page();

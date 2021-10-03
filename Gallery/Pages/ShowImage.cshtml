@@ -1,5 +1,4 @@
 ﻿@page
-@using Microsoft.AspNetCore.Http
 @model Gallery.Pages.ShowImageModel
 @{
 }
@@ -11,15 +10,14 @@
 }
 else
 {
-    <img class="d-block mx-auto" src="data:@Model.Photo.ContentType;base64,@Model.base64img" alt="@Model.Photo.OriginalName" />
+    <img class="d-block mx-auto" src="data:@Model.Photo.ContentType;base64,@Model.base64img" alt="@Model.Photo.OriginalName"/>
 
-    if (Model.comments.Count == 0)//CHANGE THIS to ==
+    if (Model.comments.Count == 0) //CHANGE THIS to ==
     {
-
         <p>no comments</p>
         <form asp-page="EditComment" method="post">
-            <input name="cAction" type="hidden" value="add" />
-            <input name="guid" type="hidden" value="@Model.Photo.Id.ToString()" />
+            <input name="cAction" type="hidden" value="add"/>
+            <input name="guid" type="hidden" value="@Model.Photo.Id.ToString()"/>
             <input name="content" class="form-control form-control-sm" type="text" placeholder="Comment">
             <button type="submit" class="btn btn-secondary mb-2">Reply</button>
         </form>
