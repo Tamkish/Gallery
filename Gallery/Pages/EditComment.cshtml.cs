@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -12,7 +11,7 @@ namespace Gallery.Pages
 {
     public class EditCommentModel : PageModel
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public EditCommentModel(ApplicationDbContext context)
         {
@@ -20,21 +19,17 @@ namespace Gallery.Pages
         }
 
         public IActionResult OnGet()
-		{
+        {
             throw new Exception("this page shouldnt be viewed in GET");
         }
 
         public async Task<IActionResult> OnPostAsync(string cAction, string guid, string content)
-		{
-            string userId = "";
+        {
+            var userId = "";
             if (!User.Identity.IsAuthenticated)
-            {
                 return Redirect("Identity/Account/Login");
-            }
-            else
-            {
-                userId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value; // získáme id přihlášeného uživatele
-            }
+            userId = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).FirstOrDefault()
+                .Value; // získáme id přihlášeného uživatele
 
             Comment comment;
             StoredFile file;
@@ -43,15 +38,9 @@ namespace Gallery.Pages
             {
                 case "add":
                     file = _context.Files.Where(f => f.Id == new Guid(guid)).FirstOrDefault();
-					if (file == null)
-					{
-                        throw new Exception("nonexistent picture");
-					}
-					if (content == null || content == "")
-					{
-                        throw new Exception("comment cant be empty");
-					}
-                    Comment newComment = new Comment
+                    if (file == null) throw new Exception("nonexistent picture");
+                    if (content == null || content == "") throw new Exception("comment cant be empty");
+                    var newComment = new Comment
                     {
                         AuthorId = userId,
                         Content = content,
@@ -66,22 +55,13 @@ namespace Gallery.Pages
 
                 case "reply":
                     comment = _context.Comments.Where(c => c.guid == new Guid(guid)).FirstOrDefault();
-                    if (comment == null)
-                    {
-                        throw new Exception("nonexistent comment");
-                    }
-                    if (content == null || content == "")
-                    {
-                        throw new Exception("comment cant be empty");
-                    }
+                    if (comment == null) throw new Exception("nonexistent comment");
+                    if (content == null || content == "") throw new Exception("comment cant be empty");
                     file = comment.ChildOf;
-					if (file == null)
-					{
-                        throw new Exception("comment doesnt have parent");
-					}
+                    if (file == null) throw new Exception("comment doesnt have parent");
                     //find file
 
-                    Comment replyComment = new Comment
+                    var replyComment = new Comment
                     {
                         AuthorId = userId,
                         Content = content,
@@ -108,14 +88,11 @@ namespace Gallery.Pages
 
                     break;
                 */
-                default:
-					break;
-			}
+            }
+
             await _context.SaveChangesAsync();
             return Page();
-            throw new Exception("redirect back");//todo;
-		}
-
-
+            throw new Exception("redirect back"); //todo;
+        }
     }
 }

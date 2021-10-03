@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Gallery.Models
+﻿namespace Gallery.Models
 {
-	public enum ThumbnailType
-	{
-		Square,
-		SameAspectRatio
-	}
+    public enum ThumbnailType
+    {
+        Square,
+        SameAspectRatio
+    }
 }

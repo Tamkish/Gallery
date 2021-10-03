@@ -4,13 +4,13 @@
 }
 
 <h1>Create new Album</h1>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div class="form-group">
                 <label asp-for="aName" class="control-label">Name</label>
-                <input class="input-group-text" type="text" asp-for="aName" class="form-control-plaintext" required />
+                <input class="input-group-text" type="text" asp-for="aName" class="form-control-plaintext" required/>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch1" asp-for="aPublic">
@@ -21,7 +21,7 @@
             <input class="input-group" type="checkbox" asp-for="aPublic" class="form-check" />
         </div>*@
             <div class="form-group">
-                <input type="submit" value="Upload" class="btn btn-primary" />
+                <input type="submit" value="Upload" class="btn btn-primary"/>
                 <a class="btn btn-secondary" asp-page="/Index">Back</a>
             </div>
         </form>

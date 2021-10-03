@@ -8,8 +8,8 @@
     foreach (var photo in Model.files)
     {
         <form class="d-inline" asp-page="ShowImage" method="post">
-            <input type="hidden" name="PhotoId" value="@photo.Id" />
-            <input type="image" name="submit" class="img-thumbnail" src='data:image/png;base64,@System.Convert.ToBase64String(photo.Thumbnails.FirstOrDefault().Blob)' />
+            <input type="hidden" name="PhotoId" value="@photo.Id"/>
+            <input type="image" name="submit" class="img-thumbnail" src='data:image/png;base64,@Convert.ToBase64String(photo.Thumbnails.FirstOrDefault().Blob)'/>
         </form>
     }
 }
